@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -15,17 +16,18 @@ import com.minesweeperapp.runner.GameRunner;
 
 public class GameRunnerTest {
     private GameRunner gameRunner;
-    private final InputStream systemIn = System.in;
     private ByteArrayInputStream testIn;
+    private InputStream originalIn;
 
     @Before
     public void setUp() {
         gameRunner = new GameRunner();
+        originalIn = System.in;
     }
 
     @After
     public void restoreSystemIn() {
-        System.setIn(systemIn);
+        System.setIn(originalIn);
     }
 
     // test private method initializeVars
@@ -83,6 +85,17 @@ public class GameRunnerTest {
 
     }
 
+    // test private method printHeader
+    @Test
+    public void testPrintHeader() throws Exception {
+        // make method accessible for testing purposes
+        Method printHeaderMethod = GameRunner.class.getDeclaredMethod("printHeader");
+        printHeaderMethod.setAccessible(true);
+
+        // doesn't assert anything, but it checks if the method runs without errors
+        printHeaderMethod.invoke(gameRunner);
+    }
+
     // test private method isPreferenceValid
     @Test
     public void testIsPreferenceValid() throws Exception {
@@ -112,6 +125,57 @@ public class GameRunnerTest {
         mineNumField.set(gameRunner, 8);
         assertTrue((boolean) isPreferenceValidMethod.invoke(gameRunner));
 
+    }
+
+    // test private method initializeGame
+    @Test
+    public void testInitializeGame() throws Exception {
+        // make field accessible for testing purposes
+        Field gridSizeField = GameRunner.class.getDeclaredField("gridSize");
+        gridSizeField.setAccessible(true);
+        gridSizeField.set(gameRunner, 4);
+
+        // make field accessible for testing purposes
+        Field mineNumField = GameRunner.class.getDeclaredField("mineNum");
+        mineNumField.setAccessible(true);
+        mineNumField.set(gameRunner, 3);
+
+        // make method accessible for testing purposes
+        Method initializeGameMethod = GameRunner.class.getDeclaredMethod("initializeGame");
+        initializeGameMethod.setAccessible(true);
+        initializeGameMethod.invoke(gameRunner);
+
+        // make field accessible for testing purposes
+        Field msField = GameRunner.class.getDeclaredField("ms");
+        msField.setAccessible(true);
+
+        assertNotNull(msField.get(gameRunner));
+    }
+
+    // test private method printGame
+    @Test
+    public void testPrintGame() throws Exception {
+        // make field accessible for testing purposes
+        Field gridSizeField = GameRunner.class.getDeclaredField("gridSize");
+        gridSizeField.setAccessible(true);
+        gridSizeField.set(gameRunner, 4);
+
+        // make field accessible for testing purposes
+        Field mineNumField = GameRunner.class.getDeclaredField("mineNum");
+        mineNumField.setAccessible(true);
+        mineNumField.set(gameRunner, 3);
+
+        // make method accessible for testing purposes
+        Method initializeGameMethod = GameRunner.class.getDeclaredMethod("initializeGame");
+        initializeGameMethod.setAccessible(true);
+        initializeGameMethod.invoke(gameRunner);
+
+        // make method accessible for testing purposes
+        Method printGameMethod = GameRunner.class.getDeclaredMethod("printGame");
+        printGameMethod.setAccessible(true);
+
+        // doesn't assert anything, but it checks if the method runs without errors
+        printGameMethod.invoke(gameRunner);
     }
 
     // test private method isInputValid
@@ -153,5 +217,7 @@ public class GameRunnerTest {
         moveField.set(gameRunner, "invalid");
         assertFalse((boolean) isInputValidMethod.invoke(gameRunner));
     }
+
+
 
 }
