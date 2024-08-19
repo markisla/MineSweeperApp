@@ -1,8 +1,8 @@
-package src.game;
+package com.minesweeperapp.game;
 
-import src.exception.InvalidGameSizeException;
-import src.util.CommonUtil;
-import src.util.MathUtil;
+import com.minesweeperapp.exception.InvalidGameSizeException;
+import com.minesweeperapp.util.CommonUtil;
+import com.minesweeperapp.util.MathUtil;
 
 /**
  * A parent class for board game which has methods for initializing and printing the grid

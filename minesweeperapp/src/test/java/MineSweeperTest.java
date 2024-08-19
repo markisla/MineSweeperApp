@@ -1,4 +1,3 @@
-package test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,8 +8,8 @@ import java.lang.reflect.Method;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.exception.InvalidGameSizeException;
-import src.game.MineSweeper;
+import com.minesweeperapp.exception.InvalidGameSizeException;
+import com.minesweeperapp.game.MineSweeper;
 
 public class MineSweeperTest {
 
@@ -48,22 +47,34 @@ public class MineSweeperTest {
     @Test
     public void testCheckMine() throws Exception {
         Field mineArrField = null;
+        Field adjacentMinesField = null;
         try {
-            // make private fields accessible for testing purposes
+            // make fields accessible for testing purposes
             mineArrField = MineSweeper.class.getDeclaredField("mineArr");
             mineArrField.setAccessible(true);
+
+            // make fields accessible for testing purposes
+            adjacentMinesField = MineSweeper.class.getDeclaredField("adjacentMines");
+            adjacentMinesField.setAccessible(true);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
 
-        boolean [][] mineArr = new boolean[gridSize][gridSize];
-        mineArr [1][1] = true; // set one mine
+        boolean [][] mineArr = new boolean[2][2];
+        mineArr [0][0] = true; // set one mine
         mineArrField.set(mineSweeper, mineArr);
 
-        int result = mineSweeper.checkMine(3, 3);
-        assertEquals(0, result);
+        int [][] adjacentMines = new int[2][2];
+        adjacentMines[0][0] = 0;
+        adjacentMines[0][1] = 1;
+        adjacentMines[1][0] = 1;
+        adjacentMines[1][1] = 1;
+        adjacentMinesField.set(mineSweeper, adjacentMines);
 
-        result = mineSweeper.checkMine(1, 1);
+        int result = mineSweeper.checkMine(1, 1);
+        assertEquals(1, result);
+
+        result = mineSweeper.checkMine(0, 0);
         assertEquals(-1, result);
     }
 

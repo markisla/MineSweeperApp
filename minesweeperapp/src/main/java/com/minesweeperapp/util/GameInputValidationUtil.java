@@ -1,4 +1,4 @@
-package src.util;
+package com.minesweeperapp.util;
 
 /**
  * A utility class for validating game inputs. 

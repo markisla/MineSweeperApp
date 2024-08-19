@@ -1,4 +1,4 @@
-package src.exception;
+package com.minesweeperapp.exception;
 
 /**
  * Custom Exception thrown when the grid size preferred by the player is not valid.

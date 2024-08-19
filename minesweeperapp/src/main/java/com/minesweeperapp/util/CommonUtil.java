@@ -1,4 +1,4 @@
-package src.util;
+package com.minesweeperapp.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

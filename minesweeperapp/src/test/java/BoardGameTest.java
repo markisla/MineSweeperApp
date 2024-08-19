@@ -1,5 +1,3 @@
-package test;
-
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
@@ -9,8 +7,8 @@ import java.lang.reflect.Method;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.game.BoardGame;
-import src.util.CommonUtil;
+import com.minesweeperapp.game.BoardGame;
+import com.minesweeperapp.util.CommonUtil;
 
 public class BoardGameTest{
 

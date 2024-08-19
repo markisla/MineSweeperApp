@@ -1,8 +1,8 @@
-package src.game;
+package com.minesweeperapp.game;
 
 import java.util.Random;
 
-import src.exception.InvalidGameSizeException;
+import com.minesweeperapp.exception.InvalidGameSizeException;
 
 /**
  * A child class for Minesweeper game which extends the Board Game parent class. 

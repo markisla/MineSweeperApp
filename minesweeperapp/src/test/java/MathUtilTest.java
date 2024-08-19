@@ -1,9 +1,8 @@
-package test;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import src.util.MathUtil;
+import com.minesweeperapp.util.MathUtil;
 
 public class MathUtilTest {
 
